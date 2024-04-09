@@ -85,11 +85,6 @@ return {
             on_attach = on_attach,
         }
         
-        -- configure asm server
-        lspconfig["asm_lsp"].setup{
-            capabilities = capabilities,
-            on_attach = on_attach,
-        }
         -- configure lua server
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,

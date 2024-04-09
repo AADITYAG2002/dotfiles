@@ -1,21 +1,22 @@
 return {
     -- tokyonight
-    "folke/tokyonight.nvim",
+    -- "folke/tokyonight.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    -- opts = {
+    --     style = "night",
+    -- },
+    -- config = function ()
+    --     vim.cmd[[colorscheme tokyonight]]
+    -- end
+
+    -- onedark
+    "navarasu/onedark.nvim",
     lazy = false,
-    priority = 1000,
     opts = {
-        style = "night",
+       style = 'warmer'
     },
     config = function ()
-        vim.cmd[[colorscheme tokyonight]]
+       vim.cmd[[colorscheme onedark]]
     end
-    -- onedark
-    --"navarasu/onedark.nvim",
-    --lazy = false,
-    --opts = {
-    --    style = 'warmer'
-    --},
-    -- config = function ()
-    --    vim.cmd[[colorscheme onedark]]
-    --end
 }
