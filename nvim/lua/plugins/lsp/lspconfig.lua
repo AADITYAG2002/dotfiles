@@ -8,7 +8,7 @@ return {
     config = function()
         -- import lspconfig plugin
         local lspconfig = require("lspconfig")
-
+        
         -- import cmp-nvim-lsp plugin
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -44,12 +44,6 @@ return {
             opts.desc = "Smart rename"
             keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
-            opts.desc = "Show buffer diagnostics"
-            keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-
-            opts.desc = "Show line diagnostics"
-            keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
             opts.desc = "Go to previous diagnostic"
             keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 
@@ -81,6 +75,18 @@ return {
 
         -- configure c/c++ server
         lspconfig["clangd"].setup{
+            capabilities = capabilities,
+            on_attach = on_attach,
+        }
+
+        --configure python server
+        lspconfig["pyright"].setup{
+            capabilities = capabilities,
+            on_attach = on_attach,
+        }
+
+        --configure cmake lsp
+        lspconfig["cmake"].setup{
             capabilities = capabilities,
             on_attach = on_attach,
         }

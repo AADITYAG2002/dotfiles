@@ -48,15 +48,6 @@ keymap(
   { desc = "Comment Toggle" }
 )
 
--- bufferline
-keymap("n","<leader>bp", "<Cmd>BufferLineTogglePin<CR>", {desc = "Toggle Pin"})
-keymap("n","<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", {desc = "Delete Non-Pinned Buffers" })
-keymap("n","<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", {desc = "Delete Other Buffers" })
-keymap("n","<leader>br", "<Cmd>BufferLineCloseRight<CR>", {desc = "Delete Buffers to the Right" })
-keymap("n","<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", {desc = "Delete Buffers to the Left" })
-keymap("n","<S-h>", "<cmd>BufferLineCyclePrev<cr>", {desc = "Prev Buffer" })
-keymap("n","<S-l>", "<cmd>BufferLineCycleNext<cr>", {desc = "Next Buffer"})
-
 
 -- Insert --
 ------------
