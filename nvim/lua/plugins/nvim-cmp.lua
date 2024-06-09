@@ -16,7 +16,7 @@ return {
             config = function()
                 require('lspkind').init()
             end,
-        },
+},
     },
     config = function()
         local cmp = require('cmp')
