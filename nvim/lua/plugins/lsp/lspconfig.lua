@@ -68,10 +68,10 @@ return {
         end
 
         -- configure bash server
-        lspconfig["bashls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["bashls"].setup({
+        --     capabilities = capabilities,
+        --     on_attach = on_attach,
+        -- })
 
         -- configure c/c++ server
         lspconfig["clangd"].setup{
