@@ -1,16 +1,5 @@
 return {
-    {
-        -- onedark
-        -- "navarasu/onedark.nvim",
-        -- lazy = false,
-        -- priority = 1000,
-        -- opts = {
-        --    style = 'warmer'
-        -- },
-        -- config = function ()
-        --     local onedark = require('onedark').load()
-        -- end
-    },
+    
     {
         -- onedarkpro
         "olimorris/onedarkpro.nvim",
@@ -25,6 +14,7 @@ return {
             ]])
 
             local onedark = require("onedarkpro")
+            local palette = require("onedarkpro.helpers")
 
             onedark.setup({
                 colors = {white = "#ffffff"},
