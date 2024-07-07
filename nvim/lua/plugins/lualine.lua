@@ -19,85 +19,85 @@ local colors = {
 
 local custom_theme = {
     normal = {
-        a = {fg = colors.black, bg = colors.blue, gui = 'bold'},
-        b = {fg = colors.red, bg = colors.light_black},
-        c = {fg = colors.white, bg = colors.black},
-        y = {fg = colors.cyan, bg = colors.light_black},
-        z = {fg = colors.black, bg = colors.yellow}
+        a = { fg = colors.black, bg = colors.blue, gui = "bold" },
+        b = { fg = colors.red, bg = colors.light_black },
+        c = { fg = colors.white, bg = colors.black },
+        y = { fg = colors.cyan, bg = colors.light_black },
+        z = { fg = colors.black, bg = colors.yellow },
     },
     insert = {
-        a = {fg = colors.black, bg = colors.purple, gui = 'bold'},
-        z = {fg = colors.black, bg = colors.yellow, gui = 'bold'}
+        a = { fg = colors.black, bg = colors.purple, gui = "bold" },
+        z = { fg = colors.black, bg = colors.yellow, gui = "bold" },
     },
     visual = {
-        a = {fg = colors.black, bg = colors.cyan, gui = 'bold'},
-        z = {fg= colors.black, bg = colors.yellow, gui = 'bold'}
+        a = { fg = colors.black, bg = colors.cyan, gui = "bold" },
+        z = { fg = colors.black, bg = colors.yellow, gui = "bold" },
     },
     replace = {
-        a = {fg = colors.black, bg = colors.green, gui = 'bold'},
-        z = {fg = colors.black, bg = colors.yellow, gui = 'bold'}
+        a = { fg = colors.black, bg = colors.green, gui = "bold" },
+        z = { fg = colors.black, bg = colors.yellow, gui = "bold" },
     },
     command = {
-        a = {fg = colors.black, bg = colors.yellow , gui = 'bold'},
-        z = {fg = colors.black, bg = colors.yellow, gui = 'bold'}
+        a = { fg = colors.black, bg = colors.yellow, gui = "bold" },
+        z = { fg = colors.black, bg = colors.yellow, gui = "bold" },
     },
 }
 
 return {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
 
-    config = function ()
-        local lualine = require('lualine')
+    config = function()
+        local lualine = require("lualine")
 
         lualine.setup({
             options = {
                 theme = custom_theme,
-                component_separators = { left = '', right = ''},
-                section_separators = { left = '', right = ''},
+                component_separators = { left = "", right = "" },
+                section_separators = { left = "", right = "" },
             },
             sections = {
                 lualine_a = {
                     {
-                        'mode',
-                        icon = ' ',
-                        separator = {left = '', right = ''}
+                        "mode",
+                        icon = " ",
+                        separator = { left = "", right = "" },
                     },
                 },
                 lualine_b = {
                     {
-                        'filetype',
+                        "filetype",
                         icon_only = true,
                         -- colored = false,
-                        icon = {align = 'left'},
+                        icon = { align = "left" },
                         -- color = {fg = colors.light_black, bg = colors.red},
                         -- separator = "",
-                        padding = {left = 1 , right = 0}
+                        padding = { left = 1, right = 0 },
                     },
                     {
-                        'filename',
+                        "filename",
                         path = 0,
                         -- separator = { right = ''},
-                        padding = {left = 1}
-                    }
+                        padding = { left = 1 },
+                    },
                 },
                 lualine_c = {
                     {
-                        'branch',
-                        icon = ''
+                        "branch",
+                        icon = "",
                     },
                     {
-                        'diff',
+                        "diff",
                         colored = true,
-                        symbols = {added = ' ', modified = ' ', removed = ' '}
+                        symbols = { added = " ", modified = " ", removed = " " },
                     },
                     {
-                        '%='
+                        "%=",
                     },
                     {
                         function()
-                            local msg = 'No Active Lsp'
-                            local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                            local msg = "No Active Lsp"
+                            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
                             local clients = vim.lsp.get_active_clients()
                             if next(clients) == nil then
                                 return msg
@@ -110,38 +110,52 @@ return {
                             end
                             return msg
                         end,
-                        icon = ' LSP:',
-                    }
+                        icon = " LSP:",
+                    },
+                    {
+                        function()
+                            local ok, conform = pcall(require, "conform")
+                            local formatters = table.concat(conform.formatters_by_ft[vim.bo.filetype], " ")
+                            if ok then
+                                local format = ""
+                                for formatter in formatters:gmatch("%w+") do
+                                    format = format .. formatter .. " "
+                                end
+                                return format
+                            end
+                        end,
+                        icon = " Formatter:",
+                    },
                 },
                 lualine_x = {
                     {
-                        'diagnostics',
-                        sections = {'error', 'warn', 'info', 'hint'},
-                        symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+                        "diagnostics",
+                        sections = { "error", "warn", "info", "hint" },
+                        symbols = { error = " ", warn = " ", info = " ", hint = " " },
                         colored = true,
-                        always_visible = true
-                    }
+                        always_visible = true,
+                    },
                 },
-                lualine_y = {'encoding', 'fileformat'},
+                lualine_y = { "encoding", "fileformat" },
                 lualine_z = {
                     {
-                        'location',
-                        icon = ' ',
+                        "location",
+                        icon = " ",
                     },
                     {
-                        'progress',
-                        separator = {right = ''}
-                    }
-                }
+                        "progress",
+                        separator = { right = "" },
+                    },
+                },
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = {'filename'},
-                lualine_x = {'location'},
+                lualine_c = { "filename" },
+                lualine_x = { "location" },
                 lualine_y = {},
-                lualine_z = {}
-            }
+                lualine_z = {},
+            },
         })
-    end
+    end,
 }
