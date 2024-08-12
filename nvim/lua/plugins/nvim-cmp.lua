@@ -39,17 +39,24 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
+        -- Latex
         {
-            "onsails/lspkind-nvim",
-            config = function()
-                require("lspkind").init()
-            end,
+            "micangl/cmp-vimtex",
+            ft = { "tex", "bib" },
+            config = true,
         },
+        -- {
+        --     "onsails/lspkind-nvim",
+        --     config = function()
+        --         require("lspkind").init()
+        --     end,
+        -- },
     },
     config = function()
         local cmp = require("cmp")
         local luasnip = require("luasnip")
         local cmp_buffer = require("cmp_buffer")
+        -- local lspkind = require('lspkind')
 
         require("luasnip.loaders.from_vscode").lazy_load()
         cmp.setup({
@@ -61,6 +68,7 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
+                { name = "vimtex" },
                 { name = "buffer" },
                 { name = "path" },
             }),
@@ -75,11 +83,57 @@ return {
                 },
             },
             formatting = {
-                format = function(_, vim_item)
-                    -- Kind icons
-                    vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-                    return vim_item
-                end,
+                format = function(entry, vim_item)
+                    local lspkind_ok, lspkind = pcall(require, "lspkind")
+                    if not lspkind_ok then
+                        -- From kind_icons array
+                        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+                        -- Source
+                        vim_item.menu = ({
+                            -- vimtex = "[Vimtex]" .. (vim_item.menu ~= nil and vim_item.menu or ""),
+                            vimtex = vim_item.menu,
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            nvim_lua = "[Lua]",
+                        })[entry.source.name]
+
+                        vim_item.dup = ({
+                            vimtex = 0,
+                            buffer = 0,
+                            nvim_lsp = 0,
+                            luasnip = 0,
+                        })[entry.source.name] or 0
+                        return vim_item
+                    else
+                        -- From lspkind
+                        return lspkind.cmp_format({
+                            mode = "symbol_text",
+                            maxwidth = 50,
+                            show_labelDetails = true,
+                        })(entry, vim_item)
+                    end
+                end
+                -- format = lspkind.cmp_format({
+                --     mode = 'symbol_text',
+                --     maxwidth = 50,
+                --     ellipsis_char = '...',
+                --     show_labelDetails = true,
+                --     menu = ({
+                --         buffer = "[Buffer]",
+                --         nvim_lsp = "[LSP]",
+                --         luasnip = "[LusSnip]",
+                --         latex_symbols = "[Latex]",
+                --     })
+
+                -- before = function(_, vim_item)
+                --     -- Kind icons
+                --     vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind],
+                --         vim_item.kind) -- This concatenates the icons with the name of the item kind
+                --     return vim_item
+                -- end,
+                -- })
+
             },
 
             mapping = cmp.mapping.preset.insert({
@@ -88,7 +142,7 @@ return {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-                ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+                ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
                 ["<CR>"] = cmp.mapping.confirm({ select = false }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then

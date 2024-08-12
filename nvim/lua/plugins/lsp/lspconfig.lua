@@ -1,9 +1,18 @@
 return {
     "neovim/nvim-lspconfig",
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         -- { "antosha417/nvim-lsp-file-operations", config = true},
+    },
+    opts = {
+        servers = {
+            texlab = {
+                keys = {
+                    { "<Leader>K", "<plug>(vimtex-doc-package)", desc = "Vimtex Docs", silent = true },
+                },
+            },
+        },
     },
     config = function()
         -- import lspconfig plugin
@@ -17,11 +26,12 @@ return {
         local opts = { noremap = true, silent = true }
         local on_attach = function(client, bufnr)
             opts.buffer = bufnr
+            client.server_capabilities.semanticTokensProvider = nil
 
             -- set keybinds
-            
+
             opts.desc = "Show diagnostics error"
-            keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            keymap.set("n", "<space>e", vim.diagnostic.open_float)
 
             opts.desc = "Show LSP references"
             keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
@@ -74,23 +84,23 @@ return {
         -- })
 
         -- configure c/c++ server
-        lspconfig["clangd"].setup{
+        lspconfig["clangd"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
-        }
+        })
 
         --configure python server
-        lspconfig["pyright"].setup{
+        lspconfig["pyright"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
-        }
+        })
 
         --configure cmake lsp
-        lspconfig["cmake"].setup{
+        lspconfig["cmake"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
-        }
-        
+        })
+
         -- configure lua server
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
@@ -117,5 +127,5 @@ return {
     vim.diagnostic.config({
         virtual_text = false,
         update_in_insert = false,
-    })
+    }),
 }

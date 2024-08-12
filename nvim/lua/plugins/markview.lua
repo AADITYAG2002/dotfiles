@@ -7,6 +7,9 @@ return {
     },
 
     config = function()
-        require("markview").setup()
+        require("markview").setup({
+            buf_ignore = { "nofile" },
+            modes = { "n", "no" },
+        })
     end,
 }

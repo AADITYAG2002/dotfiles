@@ -24,7 +24,10 @@ return {
                 "lua_ls",
                 "clangd",
                 "pyright",
-                "cmake"
+                "cmake",
+                -- "black",
+                -- "isort",
+                -- "clang-format",
             },
             automatic_installation = true,
         })

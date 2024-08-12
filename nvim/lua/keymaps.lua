@@ -6,8 +6,8 @@ local term_opts = { silent = true }
 local keymap = vim.keymap.set
 
 --Remap space as leader key
--- keymap("", "<Space>", "<Nop>", opts)
-
+keymap("", "<Space>", "<Nop>", opts)
+-- keymap("", "\\", "<Nop>", opts)
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -20,16 +20,16 @@ local keymap = vim.keymap.set
 ------------
 
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+keymap("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- map <C-n> to nvim tree toggle
-vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle Nvim Tree' })
+vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
 
 -- map <C-t> to toggle term
-vim.keymap.set('n', '<C-t>', '<cmd>ToggleTerm<CR>', { desc = 'Toggle Terminal' })
+vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -42,19 +42,17 @@ keymap("n", "<leader>/", function()
     require("Comment.api").toggle.linewise.current()
 end, { desc = "Comment Toggle" })
 keymap(
-  "v",
-  "<leader>/",
-  "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-  { desc = "Comment Toggle" }
+    "v",
+    "<leader>/",
+    "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    { desc = "Comment Toggle" }
 )
-
 
 -- Insert --
 ------------
 
 -- Visual --
 ------------
-
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -65,7 +63,6 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
-
 -- Terminal --
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
