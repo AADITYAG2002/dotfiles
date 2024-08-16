@@ -26,6 +26,51 @@ local kind_icons = {
     TypeParameter = "󰅲",
 }
 
+local cmp_colors = {
+    PmenuSel = { bg = "#282C34", fg = "NONE" },
+    Pmenu = { fg = "#C5CDD9", bg = "#22252A" },
+
+    CmpItemAbbrDeprecated = { fg = "#7E8294", bg = "NONE", strikethrough = true },
+    CmpItemAbbrMatch = { fg = "#82AAFF", bg = "NONE", bold = true },
+    CmpItemAbbrMatchFuzzy = { fg = "#82AAFF", bg = "NONE", bold = true },
+    CmpItemMenu = { fg = "#C792EA", bg = "NONE", italic = true },
+
+    CmpItemKindField = { fg = "#EED8DA", bg = "NONE" },
+    CmpItemKindProperty = { fg = "#EED8DA", bg = "NONE" },
+    CmpItemKindEvent = { fg = "#EED8DA", bg = "NONE" },
+
+    CmpItemKindText = { fg = "#C3E88D", bg = "NONE" },
+    CmpItemKindEnum = { fg = "#C3E88D", bg = "NONE" },
+    CmpItemKindKeyword = { fg = "#C3E88D", bg = "NONE" },
+
+    CmpItemKindConstant = { fg = "#FFE082", bg = "NONE" },
+    CmpItemKindConstructor = { fg = "#FFE082", bg = "NONE" },
+    CmpItemKindReference = { fg = "#FFE082", bg = "NONE" },
+
+    CmpItemKindFunction = { fg = "#EADFF0", bg = "NONE" },
+    CmpItemKindStruct = { fg = "#EADFF0", bg = "NONE" },
+    CmpItemKindClass = { fg = "#EADFF0", bg = "NONE" },
+    CmpItemKindModule = { fg = "#EADFF0", bg = "NONE" },
+    CmpItemKindOperator = { fg = "#EADFF0", bg = "NONE" },
+
+    CmpItemKindVariable = { fg = "#C5CDD9", bg = "NONE" },
+    CmpItemKindFile = { fg = "#C5CDD9", bg = "NONE" },
+
+    CmpItemKindUnit = { fg = "#F5EBD9", bg = "NONE" },
+    CmpItemKindSnippet = { fg = "#F5EBD9", bg = "NONE" },
+    CmpItemKindFolder = { fg = "#F5EBD9", bg = "NONE" },
+
+    CmpItemKindMethod = { fg = "#DDE5F5", bg = "NONE" },
+    CmpItemKindValue = { fg = "#DDE5F5", bg = "NONE" },
+    CmpItemKindEnumMember = { fg = "#DDE5F5", bg = "NONE" },
+
+    CmpItemKindInterface = { fg = "#D8EEEB", bg = "NONE" },
+    CmpItemKindColor = { fg = "#D8EEEB", bg = "NONE" },
+    CmpItemKindTypeParameter = { fg = "#D8EEEB", bg = "NONE" },
+}
+
+
+
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -57,6 +102,8 @@ return {
         local luasnip = require("luasnip")
         local cmp_buffer = require("cmp_buffer")
         -- local lspkind = require('lspkind')
+
+        vim.api.nvim_set_hl(0, "CmpItemKindText", cmp_colors.CmpItemKindText)
 
         require("luasnip.loaders.from_vscode").lazy_load()
         cmp.setup({

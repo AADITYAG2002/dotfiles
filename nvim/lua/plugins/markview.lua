@@ -11,5 +11,6 @@ return {
             buf_ignore = { "nofile" },
             modes = { "n", "no" },
         })
+        vim.api.nvim_set_hl(0, "markdownLinkText", { fg = "#61afef" })
     end,
 }
