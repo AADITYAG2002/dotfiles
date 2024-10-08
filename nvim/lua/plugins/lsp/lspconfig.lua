@@ -77,11 +77,11 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        -- configure bash server
-        -- lspconfig["bashls"].setup({
-        --     capabilities = capabilities,
-        --     on_attach = on_attach,
-        -- })
+        -- configure texlab
+        lspconfig["texlab"].setup({
+            -- capabilities = capabilities,
+            on_attach = on_attach,
+        })
 
         -- configure c/c++ server
         lspconfig["clangd"].setup({

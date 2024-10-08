@@ -14,9 +14,9 @@ return {
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
-                    package_uninstalled = "✗"
-                }
-            }
+                    package_uninstalled = "✗",
+                },
+            },
         })
 
         mason_lspconfig.setup({
@@ -25,9 +25,9 @@ return {
                 "clangd",
                 "pyright",
                 "cmake",
-                -- "black",
-                -- "isort",
-                -- "clang-format",
+                "black",
+                "isort",
+                "clang-format",
             },
             automatic_installation = true,
         })

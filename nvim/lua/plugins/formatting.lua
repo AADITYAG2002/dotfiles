@@ -11,11 +11,13 @@ return {
             desc = "Format buffer",
         },
     },
+
     opts = {
         formatters_by_ft = {
             python = { "isort", "black" },
             c = { "clang-format" },
             lua = { "stylua" },
+            latex = { "latexindent" },
         },
 
         format_on_save = { timeout_ms = 500, lsp_format = "fallback", async = false },
