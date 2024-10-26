@@ -70,7 +70,6 @@ local cmp_colors = {
 }
 
 
-
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",

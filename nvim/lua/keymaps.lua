@@ -28,8 +28,8 @@ keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 -- map <C-n> to nvim tree toggle
 vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
 
--- map <C-t> to toggle term
-vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+-- map <C-/> to toggle term  *note* <C-_> is used as for SOME reason <C-/> outputs <C-_>
+vim.keymap.set("n", "<C-_>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
