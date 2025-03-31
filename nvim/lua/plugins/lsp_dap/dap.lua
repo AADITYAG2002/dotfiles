@@ -121,7 +121,7 @@ return {
         dap.configurations.c = dap.configurations.cpp
         dap.configurations.asm = dap.configurations.cpp
         ---setup for python---
-        require("dap-python").setup("~/.venv/debugpy/bin/python")
+        require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/")
 
         vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
         vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "continue debugging" })
