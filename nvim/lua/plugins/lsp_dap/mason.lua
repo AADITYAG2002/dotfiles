@@ -27,6 +27,7 @@ return {
                 "clangd",
                 "pyright",
                 "cmake",
+                "verible",
             },
             automatic_installation = true,
         })

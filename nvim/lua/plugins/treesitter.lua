@@ -2,6 +2,7 @@ return {
     { -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        priority = 999,
         config = function()
             -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 

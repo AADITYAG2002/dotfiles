@@ -41,7 +41,7 @@ return {
             },
         },
         preset = {
-            bottom_search = false,
+            bottom_search = true,
             commnd_pallete = true,
             long_message_to_split = true,
             lsp_doc_border = true,
